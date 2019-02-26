@@ -7,8 +7,16 @@ struct Solution {
 impl Solution {
     pub fn is_palindrome(x: i32) -> bool {
         if x < 0 { false }
-	else if x < 10 { true }
-	else { true }
+	else if x % 10 == 0 && x != 0 { false }
+	else {
+	    let mut half_number: i32 = 0;
+	    let mut tmp_x: i32 = x;
+	    while tmp_x > half_number {
+	        half_number = half_number * 10 + tmp_x % 10;
+		tmp_x /= 10;
+	    }
+	    tmp_x == half_number || tmp_x == half_number / 10
+	}
     }
 }
 
