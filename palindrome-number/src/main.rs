@@ -28,8 +28,8 @@ fn main() {
             let number: i32 = i32::from_str(&arg).expect("Error parse.");
 
             match Solution::is_palindrome(number) {
-                true => println!("true"),
-                false => println!("false"),
+                true => println!("It's palindrome number."),
+                false => println!("It isn't palindrome number."),
 	    }
 	    break;
 	}
@@ -37,6 +37,6 @@ fn main() {
 
     match ret {
         0 => println!("Require at least one parameter."),
-	_ => println!("Finish."),
+	_ => (),
     }
 }
