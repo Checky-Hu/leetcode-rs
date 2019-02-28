@@ -7,7 +7,7 @@ struct Solution {
 impl Solution {
     pub fn count_and_say(n: i32) -> String {
         let mut str1: String = String::with_capacity(1024);
-	str1.push(49 as char);
+        str1.push(49 as char);
         let mut str2: String = String::with_capacity(1024);
 
 	let mut use_str1: bool = true;
@@ -28,12 +28,13 @@ impl Solution {
 		    count_of_n += 1
 		} else {
 		    dst_str.push((count_of_n + 48) as char);
-		    dst_str.push((prefix_n + 48) as char);
-		    count_of_n = 0;
+		    dst_str.push(prefix_n as char);
+		    count_of_n = 1;
 		    prefix_n = number;
 		}
 	    }
-	    println!("src_str:{} dst_str:{}", src_str, dst_str);
+	    dst_str.push((count_of_n + 48) as char);
+	    dst_str.push(prefix_n as char);
 	    use_str1 = !use_str1;
 	}
 
