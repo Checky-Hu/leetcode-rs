@@ -30,7 +30,7 @@ impl Solution {
 	    if sum != tmp_dividend as i64 {
 	        result -= 1;
 	    }
-	    if  is_same {
+	    if is_same {
 	        if result > i32::max_value() as i64 {
 		    i32::max_value()
 		} else {
