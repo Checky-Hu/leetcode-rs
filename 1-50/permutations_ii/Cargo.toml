@@ -5,4 +5,4 @@ authors = ["Checky-Hu <checkywho@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-quicksort = { path = "../base/quick-sort" }
+quicksort = { path = "../../base/quick-sort" }
