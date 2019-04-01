@@ -48,7 +48,6 @@ pub mod bsi32 {
 		        break;
 		    }
 	        }
-	        println!("index:{} i:{} j:{}", index, i, j);
 	    }
 	    j as i32
 	}

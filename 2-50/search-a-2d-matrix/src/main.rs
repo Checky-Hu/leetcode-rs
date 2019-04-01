@@ -19,7 +19,6 @@ impl Solution {
 	}
 
 	let mut row: i32 = bsi32::binary_search_for_pos(&tmp_column, 0, matrix.len() - 1, target);
-	println!("row: {}", row);
 	if row == -1 {
 	    false
 	} else {
@@ -28,7 +27,6 @@ impl Solution {
 	    }
 
 	    let column: i32 = bsi32::binary_search_for_pos(&matrix[row as usize], 0, matrix[row as usize].len() - 1, target);
-	    println!("column: {}", column);
 	    if column < 0 {
 	        false
 	    } else {
