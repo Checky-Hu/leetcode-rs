@@ -16,12 +16,20 @@ impl Solution {
 	qsi32::quick_sort(&mut sorted_nums, 0, len - 1);
 
 	let mut index: usize = 0;
+	let mut preceding_pos: usize = 0;
+	let mut preceding_n: i32 = 0;
 	while index < len {
-	    let mut i: usize = 0;
+	    let cur_n: i32 = sorted_nums[index];
 	    let cur_len: usize = result.len();
+	    if index == 0 || preceding_n != cur_n {
+	        preceding_n = cur_n;
+		preceding_pos = cur_len;
+	    }
+
+	    let mut i: usize = cur_len - preceding_pos;
 	    while i < cur_len {
                 let mut tmp: Vec<i32> = result[i].clone();
-		tmp.push(sorted_nums[index]);
+		tmp.push(cur_n);
 		result.push(tmp);
 		i += 1;
 	    }
