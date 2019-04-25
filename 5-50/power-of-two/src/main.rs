@@ -23,6 +23,7 @@ fn main() {
             ret = index;
             let n: i32 = i32::from_str(&arg).expect("Error parse.");
             println!("Power of Two: {}", Solution::is_power_of_two(n));
+	    break;
 	}
     }
 
