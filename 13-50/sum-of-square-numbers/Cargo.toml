@@ -1,0 +1,8 @@
+[package]
+name = "sum-of-square-numbers"
+version = "0.1.0"
+authors = ["Checky-Hu <checkywho@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+binarysearch = { path = "../../base/binary-search" }
