@@ -61,7 +61,6 @@ impl Solution {
 			}
 			x = tmp;
 		    }
-	            println!("x {} y {}", x, y);
 	            let cur: i32 = x * x + y * y;
 		    if result < cur {
 		        result = cur;
