@@ -16,7 +16,7 @@ impl Solution {
         let mut flags: Vec<Vec<bool>> = vec![vec![false; c]; r];
         for i in 0..r {
             for j in 0..c {
-		        if flags[i][j] || grid[i][j] == '0' {
+                if flags[i][j] || grid[i][j] == '0' {
                     continue;
                 }
                 flags[i][j] = true;
@@ -25,8 +25,8 @@ impl Solution {
                     let tmp: usize = v.pop().unwrap();
                     let (x, y) = (tmp / c, tmp % c);
                     if x > 0 && !flags[x - 1][y] && grid[x -1][y] == '1' {
-		                flags[x - 1][y] = true;
-			            v.push(tmp - c);
+                        flags[x - 1][y] = true;
+                        v.push(tmp - c);
                     }
                     if x + 1 < r && !flags[x + 1][y] && grid[x + 1][y] == '1' {
                         flags[x + 1][y] = true;
