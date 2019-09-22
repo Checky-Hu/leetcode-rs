@@ -1,3 +1,4 @@
+use std::collections::HashSet;
 use std::env;
 use std::str::FromStr;
 
@@ -6,20 +7,31 @@ struct Solution {
 
 impl Solution {
     pub fn can_finish(num_courses: i32, prerequisites: Vec<Vec<i32>>) -> bool {
-        if num_courses <= 0 {
-	    return false
+        let mut flags: Vec<HashSet<i32>> = vec![HashSet::new(); num_courses as usize];
+	for v in prerequisites {
+	    flags[v[1] as usize].insert(v[0]);
 	}
-
-	let mut count: i32 = 0;
-        let mut record: Vec<bool> = vec![false; num_courses];
-        for v in prerequisites {
-	    if record[v[1] as usize] {
+	let mut list: Vec<i32> = vec![0; num_courses as usize];
+	for hashset in &flags {
+	    for x in hashset.iter() {
+	        list[*x as usize] += 1;
+	    }
+	}
+	for _i in 0..num_courses {
+	    let mut j: i32 = 0;
+	    while j < num_courses {
+	        if list[j as usize] == 0 {
+		    break;
+		} else {
+		    j += 1;
+		}
+	    }
+	    if j == num_courses {
 	        return false
 	    } else {
-	        record[v[1] as usize] = true;
-	        count += 1;
-		if count > num_courses {
-		    return false
+	        list[j as usize] = -1;
+		for x in flags[j as usize].iter() {
+		    list[*x as usize] -= 1;
 		}
 	    }
 	}
