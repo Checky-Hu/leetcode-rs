@@ -1,1 +1,6 @@
+# Output files of compiling.
 target
+
+# Intermediate files after compiling.
+Cargo.lock
+
