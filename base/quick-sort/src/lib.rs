@@ -58,6 +58,33 @@ pub mod qsi32 {
     }
 }
 
+pub mod qsstr {
+    pub fn quick_sort_by_descend_len(strs: &mut Vec<String>, left: usize, right: usize) {
+        if left >= right {
+            return;
+        }
+
+        let mut i: usize = left;
+        let mut j: usize = right;
+        let temp: String = strs[left].clone();
+        while i < j {
+            while i < j && strs[j].len() <= temp.len() {
+                j -= 1;
+            }
+            strs[i] = strs[j].clone();
+            while i < j && strs[i].len() >= temp.len() {
+                i += 1;
+            }
+            strs[j] = strs[i].clone();
+        }
+        strs[i] = temp;
+        if left + 1 < i {
+            quick_sort_by_descend_len(strs, left, i - 1);
+        }
+        quick_sort_by_descend_len(strs, i + 1, right);
+    }
+}
+
 pub mod qsvec {
     pub fn quick_sort(nums: &mut Vec<Vec<i32>>, left: usize, right: usize) {
         if left >= right {
