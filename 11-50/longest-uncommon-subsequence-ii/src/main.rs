@@ -9,7 +9,6 @@ struct Solution {
 
 impl Solution {
     fn is_subsequence(a: &String, b: &String) -> bool {
-        println!("{} {}", a, b);
         let a_len: usize = a.len();
         let a_bytes: &[u8] = a.as_bytes();
         let b_len: usize = b.len();
@@ -35,7 +34,6 @@ impl Solution {
                 return false
             }
         }
-        println!("{} {}", i, j);
         true
     }
 
@@ -53,7 +51,6 @@ impl Solution {
         let mut len: usize = 0;
         let mut tmp: Vec<String> = Vec::new();
         for s in once.drain() {
-            println!("{}", s);
             tmp.push(s);
             len += 1;
         }
