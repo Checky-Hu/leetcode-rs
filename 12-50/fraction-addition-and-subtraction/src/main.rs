@@ -91,7 +91,6 @@ impl Solution {
             }
         }
         Solution::add_two_fraction(&mut pre_num, &mut pre_den, cur_num, cur_den, is_add);
-        println!("pre_num:{} pre_den:{}", pre_num, pre_den);
         pre_num.to_string() + "/" + &pre_den.to_string()
     }
 }
