@@ -59,6 +59,9 @@ pub mod qsi32 {
 }
 
 pub mod qsstr {
+
+use std::cmp::Ordering;
+
     pub fn quick_sort_by_descend_len(strs: &mut Vec<String>, left: usize, right: usize) {
         if left >= right {
             return;
@@ -84,24 +87,24 @@ pub mod qsstr {
         quick_sort_by_descend_len(strs, i + 1, right);
     }
 
-    pub fn compare_string(a: &String, b: &String) -> bool {
+    pub fn compare_string(a: &str, b: &str) -> bool {
         let a_len: usize = a.len();
         let b_len: usize = b.len();
-        if a_len > b_len {
-            true
-        } else if a_len < b_len {
-            false
-        } else {
-            let a_bytes: &[u8] = a.as_bytes();
-            let b_bytes: &[u8] = b.as_bytes();
-            for i in 0..a_len {
-                if a_bytes[i] < b_bytes[i] {
-                    return true
-                } else if a_bytes[i] > b_bytes[i] {
-                    return false
+        match a_len.cmp(&b_len) {
+            Ordering::Greater => true,
+            Ordering::Less => false,
+            Ordering::Equal => {
+                let a_bytes: &[u8] = a.as_bytes();
+                let b_bytes: &[u8] = b.as_bytes();
+                for i in 0..a_len {
+                    match a_bytes[i].cmp(&b_bytes[i]) {
+                        Ordering::Less => return true,
+                        Ordering::Greater => return false,
+                        Ordering::Equal => (),
+                    }
                 }
+                true
             }
-            true
         }
     }
 
@@ -160,4 +163,3 @@ pub mod qsvec {
         quick_sort(nums, i + 1, right);
     }
 }
-
