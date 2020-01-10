@@ -163,3 +163,55 @@ pub mod qsvec {
         quick_sort(nums, i + 1, right);
     }
 }
+
+pub mod qstuple {
+use std::cmp::Ordering;
+
+    pub fn compare_tuple(a: &(i32, String), b: &(i32, String)) -> bool {
+        match a.0.cmp(&b.0) {
+            Ordering::Greater => true,
+            Ordering::Less => false,
+            Ordering::Equal => {
+                let a_bytes: &[u8] = a.1.as_bytes();
+                let a_len: usize = a_bytes.len();
+                let b_bytes: &[u8] = b.1.as_bytes();
+                let b_len: usize = b_bytes.len();
+                let mut i: usize = 0;
+                while i < a_len && i < b_len {
+                    match a_bytes[i].cmp(&b_bytes[i]) {
+                        Ordering::Less => return true,
+                        Ordering::Greater => return false,
+                        Ordering::Equal => (),
+                    }
+                    i += 1;
+                }
+                i == a_len
+            }
+        }
+    }
+
+    pub fn quick_sort_by_func(tuples: &mut Vec<(i32, String)>, left: usize, right: usize) {
+        if left >= right {
+            return;
+        }
+
+        let mut i: usize = left;
+        let mut j: usize = right;
+        let temp: (i32, String) = tuples[left].clone();
+        while i < j {
+            while i < j && !compare_tuple(&tuples[j], &temp) {
+                j -= 1;
+            }
+            tuples[i] = tuples[j].clone();
+            while i < j && compare_tuple(&tuples[i], &temp) {
+                i += 1;
+            }
+            tuples[j] = tuples[i].clone();
+        }
+        tuples[i] = temp;
+        if left + 1 < i {
+            quick_sort_by_func(tuples, left, i - 1);
+        }
+        quick_sort_by_func(tuples, i + 1, right);
+    }
+}
