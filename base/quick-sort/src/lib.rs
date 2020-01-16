@@ -132,6 +132,48 @@ use std::cmp::Ordering;
         }
         quick_sort_by_func(strs, i + 1, right);
     }
+
+    pub fn compare_string_in_dict(a: &str, b: &str) -> bool {
+        let a_bytes: &[u8] = a.as_bytes();
+        let a_len: usize = a_bytes.len();
+        let b_bytes: &[u8] = b.as_bytes();
+        let b_len: usize = b_bytes.len();
+        let mut i: usize = 0;
+        while i < a_len && i < b_len {
+            match a_bytes[i].cmp(&b_bytes[i]) {
+                Ordering::Less => return true,
+                Ordering::Greater => return false,
+                Ordering::Equal => (),
+            }
+            i += 1;
+        }
+        i == a_len
+    }
+
+    pub fn quick_sort_by_dict(strs: &mut Vec<String>, left: usize, right: usize) {
+        if left >= right {
+            return;
+        }
+
+        let mut i: usize = left;
+        let mut j: usize = right;
+        let temp: String = strs[left].clone();
+        while i < j {
+            while i < j && !compare_string_in_dict(&strs[j], &temp) {
+                j -= 1;
+            }
+            strs[i] = strs[j].clone();
+            while i < j && compare_string_in_dict(&strs[i], &temp) {
+                i += 1;
+            }
+            strs[j] = strs[i].clone();
+        }
+        strs[i] = temp;
+        if left + 1 < i {
+            quick_sort_by_dict(strs, left, i - 1);
+        }
+        quick_sort_by_dict(strs, i + 1, right);
+    }
 }
 
 pub mod qsvec {
