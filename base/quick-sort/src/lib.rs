@@ -256,4 +256,32 @@ use std::cmp::Ordering;
         }
         quick_sort_by_func(tuples, i + 1, right);
     }
+
+    pub fn quick_sort(tuples: &mut Vec<(i32, i32)>, left: usize, right: usize) {
+        if left >= right {
+            return;
+        }
+
+        let mut i: usize = left;
+        let mut j: usize = right;
+        let temp: (i32, i32) = (tuples[left].0, tuples[left].1);
+        while i < j {
+            while i < j && tuples[j].0 >= temp.0 {
+                j -= 1;
+            }
+            tuples[i].0 = tuples[j].0;
+            tuples[i].1 = tuples[j].1;
+            while i < j && tuples[i].0 <= temp.0 {
+                i += 1;
+            }
+            tuples[j].0 = tuples[i].0;
+            tuples[j].1 = tuples[i].1;
+        }
+        tuples[i].0 = temp.0;
+        tuples[i].1 = temp.1;
+        if left + 1 < i {
+            quick_sort(tuples, left, i - 1);
+        }
+        quick_sort(tuples, i + 1, right);
+    }
 }
