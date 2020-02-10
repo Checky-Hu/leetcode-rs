@@ -21,9 +21,6 @@ impl Solution {
             return 11;
         }
         for i in 1i32..=100_000i32 {
-            if i == 123 {
-                println!("{}", i.reverse_bits());
-            }
             let mut tmp_s: String = i.to_string();
             let mut rev_s: Vec<u8> = tmp_s.clone().into_bytes();
             rev_s.reverse();
