@@ -6,34 +6,18 @@ struct Solution {}
 impl Solution {
     pub fn num_subarrays_with_sum(a: Vec<i32>, s: i32) -> i32 {
         let len: usize = a.len();
+        let mut sum: Vec<i32> = vec![0; len + 1];
+        for (i, v) in a.iter().enumerate() {
+            sum[i + 1] = sum[i] + *v;
+        }
+        let mut fun: Vec<i32> = vec![0; len + 1];
+        fun[0] = 1;
         let mut result: i32 = 0;
-        for i in 0..len {
-            let mut sum: i32 = 0;
-            let mut j: usize = i;
-            while j < len {
-                sum += a[j];
-                if sum >= s {
-                    break;
-                } else {
-                    j += 1;
-                }
+        for i in 1..=len {
+            if sum[i] >= s {
+                result += fun[(sum[i] - s) as usize];
             }
-            if j == len {
-                break;
-            } else if sum > s {
-                continue;
-            } else {
-                let mut k: usize = j + 1;
-                while k < len {
-                    if a[k] == 1 {
-                        break;
-                    } else {
-                        k += 1;
-                    }
-                }
-                println!("r:{}", result);
-                result += (k - j) as i32;
-            }
+            fun[sum[i] as usize] += 1;
         }
         result
     }
