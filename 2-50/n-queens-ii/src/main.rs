@@ -4,21 +4,11 @@ use std::str::FromStr;
 struct Solution {}
 
 impl Solution {
-    fn solve_n_queens_loop(
-        queens: &mut Vec<(i32, i32)>,
-        i: i32,
-        n: i32,
-        result: &mut Vec<Vec<String>>,
-    ) {
+    fn total_n_queens_loop(queens: &mut Vec<(i32, i32)>, i: i32, n: i32) -> i32 {
         if i == n {
-            let mut board: Vec<String> = Vec::with_capacity(n as usize);
-            for queen in queens.iter() {
-                let mut row: Vec<u8> = vec![b'.'; n as usize];
-                row[queen.1 as usize] = b'Q';
-                board.push(String::from_utf8(row).unwrap_or_default());
-            }
-            result.push(board);
+            1
         } else {
+            let mut result: i32 = 0;
             for j in 0..n {
                 let mut is_valid: bool = true;
                 for queen in queens.iter() {
@@ -33,18 +23,17 @@ impl Solution {
                 }
                 if is_valid {
                     queens.push((i, j));
-                    Solution::solve_n_queens_loop(queens, i + 1, n, result);
+                    result += Solution::total_n_queens_loop(queens, i + 1, n);
                     queens.pop();
                 }
             }
+            result
         }
     }
 
-    pub fn solve_n_queens(n: i32) -> Vec<Vec<String>> {
+    pub fn total_n_queens(n: i32) -> i32 {
         let mut queens: Vec<(i32, i32)> = Vec::with_capacity(n as usize);
-        let mut result: Vec<Vec<String>> = Vec::new();
-        Solution::solve_n_queens_loop(&mut queens, 0, n, &mut result);
-        result
+        Solution::total_n_queens_loop(&mut queens, 0, n)
     }
 }
 
@@ -54,13 +43,11 @@ fn main() {
         if 1 == index {
             ret += 1;
             let n: i32 = i32::from_str(&arg).expect("Error parse.");
-            let result = Solution::solve_n_queens(n);
-            for row in result.iter() {
-                for v in row.iter() {
-                    println!("{}", *v);
-                }
-                println!();
-            }
+            println!(
+                "{} queens total solutions: {}",
+                n,
+                Solution::total_n_queens(n)
+            );
             break;
         }
     }
