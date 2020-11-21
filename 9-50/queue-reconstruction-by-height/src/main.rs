@@ -1,3 +1,4 @@
+use std::cmp::Ordering;
 use std::env;
 use std::str::FromStr;
 
@@ -7,7 +8,11 @@ impl Solution {
     pub fn reconstruct_queue(people: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
         let len: usize = people.len();
         let mut result: Vec<Vec<i32>> = people;
-        result.sort_by(|a, b| b[0].cmp(&a[0]));
+        result.sort_by(|a, b| match a[0].cmp(&b[0]) {
+            Ordering::Less => Ordering::Greater,
+            Ordering::Equal => a[1].cmp(&b[1]),
+            Ordering::Greater => Ordering::Less,
+        });
         let mut i: usize = 0;
         while i < len {
             let target: usize = result[i][1] as usize;
