@@ -6,19 +6,20 @@ struct Solution {}
 impl Solution {
     pub fn get_smallest_string(n: i32, k: i32) -> String {
         let mut result: Vec<u8> = Vec::with_capacity(n as usize);
-        let mut i: i32 = n;
+        let mut max: i32 = (n - 1) * 26;
         let mut rest: i32 = k;
-        while rest != 0 {
-            let max: i32 = (i - 1) * 26;
+        loop {
             if max + 1 >= rest {
                 result.push(97_u8);
                 rest -= 1;
+                max -= 26;
             } else {
-                let cur: i32 = rest - max;
-                result.push(cur as u8 + 96);
-                rest -= cur;
+                result.push((rest - max) as u8 + 96_u8);
+                for _i in 0..(max / 26) {
+                    result.push(122_u8);
+                }
+                break;
             }
-            i -= 1;
         }
         String::from_utf8(result).unwrap()
     }
