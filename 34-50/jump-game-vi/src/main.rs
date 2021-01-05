@@ -23,18 +23,10 @@ impl Solution {
                     }
                 }
                 index.push(i);
-                if index[0] + dis > i {
+                if i - index[0] >= dis {
                     index.remove(0);
                 }
             }
-            for r in result.iter() {
-                print!("{} ", *r);
-            }
-            println!();
-            for i in index.iter() {
-                print!("{} ", *i);
-            }
-            println!();
         }
         result[len - 1]
     }
