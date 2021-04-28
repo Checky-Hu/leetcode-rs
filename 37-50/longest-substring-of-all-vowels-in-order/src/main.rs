@@ -33,7 +33,6 @@ impl Solution {
                 status.1 = i;
                 status.2 = i;
             }
-            status.2 = i;
         }
         if status.0 == 'u' {
             let t: i32 = (status.2 - status.1) as i32 + 1;
